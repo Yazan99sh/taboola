@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "112949738401",
+    "project_id": "beaming-glyph-306420",
+    "storage_bucket": "beaming-glyph-306420.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112949738401:android:b22264ce469e4dce47a9e0",
+        "android_client_info": {
+          "package_name": "sy.xteam.taboola"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "112949738401-f39r8ie65lul55q63808qgcqdf9fdu6v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCRinQYP4zlcwOOcPJiWTUTvHc1xvHoyM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "112949738401-f39r8ie65lul55q63808qgcqdf9fdu6v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
