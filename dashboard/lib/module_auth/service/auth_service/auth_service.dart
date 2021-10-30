@@ -43,32 +43,30 @@ class AuthService {
       await logout();
       _authSubject.addError(S.current.networkError);
       throw AuthorizationException(S.current.networkError);
-    } else if (loginResult.statusCode == '401') {
+    }
+     else if (loginResult.statusCode == '400') {
       await logout();
       _authSubject.addError(S.current.invalidCredentials);
-      throw AuthorizationException(S.current.networkError);
-    } else if (loginResult.token == null) {
+      throw AuthorizationException(S.current.invalidCredentials);
+    }
+    else if (loginResult.statusCode != null) {
+      await logout();
+        _authSubject.addError(StatusCodeHelper.getStatusCodeMessages(
+            loginResult.statusCode ?? '0'));
+        throw AuthorizationException(StatusCodeHelper.getStatusCodeMessages(
+            loginResult.statusCode ?? '0'));
+    }
+    else if (loginResult.token == null) {
       await logout();
       _authSubject.addError(StatusCodeHelper.getStatusCodeMessages(
           loginResult.statusCode ?? '0'));
       throw AuthorizationException(StatusCodeHelper.getStatusCodeMessages(
           loginResult.statusCode ?? '0'));
     }
-    // RegisterResponse? response = await _authManager.userTypeCheck(
-    //     'ROLE_ADMIN', loginResult.token ?? '');
-
-    // if (response?.statusCode != '201') {
-    //   await logout();
-    //   _authSubject.addError(
-    //       StatusCodeHelper.getStatusCodeMessages(response?.statusCode ?? '0'));
-    //   throw AuthorizationException(
-    //       StatusCodeHelper.getStatusCodeMessages(response?.statusCode ?? '0'));
-    // }
 
     _prefsHelper.setUsername(username);
     _prefsHelper.setPassword(password);
     _prefsHelper.setToken(loginResult.token);
-
     _authSubject.add(AuthStatus.AUTHORIZED);
   }
 

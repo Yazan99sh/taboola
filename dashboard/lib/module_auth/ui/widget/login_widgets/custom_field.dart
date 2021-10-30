@@ -1,107 +1,81 @@
 import 'package:flutter/material.dart';
-import 'package:taboola/generated/l10n.dart';
 
-class CustomLoginFormField extends StatefulWidget {
-  final double height;
-  final EdgeInsetsGeometry contentPadding;
-  final String? hintText;
-  final Widget? preIcon;
-  final Widget? sufIcon;
+class InputField extends StatefulWidget {
   final TextEditingController? controller;
-  final bool readOnly;
-  final GestureTapCallback? onTap;
-  final bool last;
-  final bool password;
+  final String? hintText;
+  final String? errorText;
+  final ValueChanged<String>? valueChanged;
+  final IconData? iconData;
+  final TextInputType? textInputType;
+  final bool validText;
+
+  const InputField(
+      {Key? key,
+        this.textInputType,
+        this.iconData,
+        this.errorText,
+        this.controller,
+        this.valueChanged,
+        this.validText = false,
+        this.hintText})
+      : super(key: key);
 
   @override
-  _CustomLoginFormFieldState createState() => _CustomLoginFormFieldState();
-
-  CustomLoginFormField(
-      {this.height = 50,
-      this.contentPadding = const EdgeInsets.fromLTRB(16, 0, 16, 0),
-      this.hintText,
-      this.preIcon,
-      this.sufIcon,
-      this.controller,
-      this.readOnly = false,
-      this.onTap,
-      this.last = false,
-      this.password = false});
+  _InputFieldState createState() => _InputFieldState();
 }
 
-class _CustomLoginFormFieldState extends State<CustomLoginFormField> {
-  AutovalidateMode mode = AutovalidateMode.disabled;
-  bool showPassword = false;
-  bool clean = true;
+class _InputFieldState extends State<InputField> {
   @override
   Widget build(BuildContext context) {
-    final node = FocusScope.of(context);
-
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-        border: Border.all(color: Theme.of(context).primaryColor, width: 2),
-      ),
-      child: Padding(
-        padding: !clean ? EdgeInsets.only(bottom: 8.0) : EdgeInsets.zero,
-        child: TextFormField(
-          autovalidateMode: mode,
-          onChanged: (s) {
-            setState(() {});
-          },
-          toolbarOptions: ToolbarOptions(
-              copy: true, paste: true, selectAll: true, cut: true),
-          validator: (value) {
-            if (mode == AutovalidateMode.disabled) {
-              setState(() {
-                mode = AutovalidateMode.onUserInteraction;
-              });
-            }
-            if (value == null) {
-              clean = false;
-              return S.of(context).pleaseCompleteField;
-            } else if (value.isEmpty) {
-              clean = false;
-              return S.of(context).pleaseCompleteField;
-            } else if (value.length < 6 && widget.password) {
-              clean = false;
-              return S.of(context).passwordIsTooShort;
-            } else {
-              clean = true;
-              return null;
-            }
-          },
-          onTap: widget.onTap,
-          controller: widget.controller,
-          readOnly: widget.readOnly,
-          obscureText: widget.password && !showPassword,
-          onEditingComplete: widget.last ? null : () => node.nextFocus(),
-          onFieldSubmitted: widget.last ? (_) => node.unfocus() : null,
-          textInputAction: widget.last ? null : TextInputAction.next,
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: widget.hintText,
-            prefixIcon: widget.preIcon,
-            suffixIcon: widget.password
-                ? IconButton(
-                    onPressed: () {
-                      if (showPassword) {
-                        showPassword = false;
-                      } else {
-                        showPassword = true;
-                      }
-                      setState(() {});
-                    },
-                    icon: Icon(!showPassword
-                        ? Icons.remove_red_eye_rounded
-                        : Icons.visibility_off_rounded))
-                : null,
-            enabledBorder: InputBorder.none,
-            contentPadding: widget.contentPadding,
-            focusedBorder: InputBorder.none,
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 30.0 , right: 30.0 , top: 10.0 , bottom: 15.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              borderRadius: BorderRadius.circular(25),
+              boxShadow: [
+                BoxShadow(
+                  color: Theme.of(context).shadowColor.withOpacity(0.2),
+                  spreadRadius: 1.0,
+                  blurRadius: 1.0,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: TextFormField(
+              controller: widget.controller,
+              keyboardType: widget.textInputType,
+              style:  TextStyle(color: Theme.of(context).primaryColor),
+              onChanged: widget.valueChanged,
+              decoration: InputDecoration(
+                icon: Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Icon(
+                    widget.iconData,
+                    size: 35,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
+                hintText: widget.hintText,
+                hintStyle:
+                 TextStyle(color: Theme.of(context).primaryColor.withOpacity(0.5)),
+                border: InputBorder.none,
+              ),
+            ),
           ),
         ),
-      ),
+        if (widget.validText)
+          Container(
+              alignment: Alignment.bottomLeft,
+              padding:const EdgeInsets.only(left: 40.0 ),
+              child: Text(
+                widget.errorText ?? "",
+                style: TextStyle(color: Theme.of(context).primaryColor.withOpacity(0.5)),
+              )
+          ),
+      ],
     );
   }
 }

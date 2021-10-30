@@ -518,5 +518,6 @@
   "specific": "محدد",
   "clients": "العملاء",
   "storeAvailable": "المتجر متوفر",
-  "storesInActive": "المتاجر الغير متاحة"
+  "storesInActive": "المتاجر الغير متاحة",
+  "pleaseEnterYourPassword": "من فضلك أدخل كلمة المرور"
 }

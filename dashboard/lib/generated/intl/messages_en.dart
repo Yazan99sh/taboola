@@ -512,6 +512,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please Download taboola"),
         "pleaseEnterYourEmail":
             MessageLookupByLibrary.simpleMessage("Please Enter Your Email"),
+        "pleaseEnterYourPassword":
+            MessageLookupByLibrary.simpleMessage("PLease enter your password"),
         "pleaseInputPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Please input phone number"),
         "pleaseLoginToContinue":

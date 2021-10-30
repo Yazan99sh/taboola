@@ -16,11 +16,11 @@ class AppThemeDataService {
   AppThemeDataService(this._preferencesHelper);
 
   static Color get PrimaryColor {
-    return Colors.orange;
+    return Color(0xFF3AAD26);
   }
 
   static Color get PrimaryDarker {
-    return Colors.orange;
+    return Color(0xFF000000);
   }
 
   static Color get AccentColor {

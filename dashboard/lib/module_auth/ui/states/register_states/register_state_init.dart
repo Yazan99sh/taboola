@@ -65,39 +65,39 @@ class RegisterStateInit extends RegisterState {
                         style: tileStyle,
                       ),
                     ),
-                    ListTile(
-                      title: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CustomLoginFormField(
-                          contentPadding: EdgeInsets.only(
-                              left: 0, right: 0, top: 15, bottom: 0),
-                          controller: usernameController,
-                          hintText: S.of(context).registerHint,
-                          preIcon: Icon(Icons.email),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 8.0, left: 32, right: 32, top: 8),
-                      child: Text(
-                        S.of(context).password,
-                        style: tileStyle,
-                      ),
-                    ),
-                    ListTile(
-                      title: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CustomLoginFormField(
-                          preIcon: Icon(Icons.lock),
-                          last: true,
-                          controller: passwordController,
-                          password: true,
-                          contentPadding: EdgeInsets.fromLTRB(0, 15, 0, 0),
-                          hintText: S.of(context).password,
-                        ),
-                      ),
-                    ),
+                    // ListTile(
+                    //   title: Padding(
+                    //     padding: const EdgeInsets.all(8.0),
+                    //     child: CustomLoginFormField(
+                    //       contentPadding: EdgeInsets.only(
+                    //           left: 0, right: 0, top: 15, bottom: 0),
+                    //       controller: usernameController,
+                    //       hintText: S.of(context).registerHint,
+                    //       preIcon: Icon(Icons.email),
+                    //     ),
+                    //   ),
+                    // ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(
+                    //       bottom: 8.0, left: 32, right: 32, top: 8),
+                    //   child: Text(
+                    //     S.of(context).password,
+                    //     style: tileStyle,
+                    //   ),
+                    // ),
+                    // ListTile(
+                    //   title: Padding(
+                    //     padding: const EdgeInsets.all(8.0),
+                    //     child: CustomLoginFormField(
+                    //       preIcon: Icon(Icons.lock),
+                    //       last: true,
+                    //       controller: passwordController,
+                    //       password: true,
+                    //       contentPadding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                    //       hintText: S.of(context).password,
+                    //     ),
+                    //   ),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.only(top: 16.0),
                       child: CheckboxListTile(

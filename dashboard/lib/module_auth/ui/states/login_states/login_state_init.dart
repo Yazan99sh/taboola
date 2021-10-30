@@ -1,12 +1,9 @@
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:taboola/generated/l10n.dart';
-import 'package:taboola/module_auth/authorization_routes.dart';
 import 'package:taboola/module_auth/ui/screen/login_screen/login_screen.dart';
 import 'package:taboola/module_auth/ui/states/login_states/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:taboola/module_auth/ui/widget/login_widgets/custom_field.dart';
-import 'package:taboola/utils/components/auth_buttons.dart';
-import 'package:taboola/utils/global/screen_type.dart';
+import 'package:taboola/utils/components/background_screen.dart';
 import 'package:taboola/utils/helpers/custom_flushbar.dart';
 import 'package:taboola/utils/images/images.dart';
 
@@ -18,101 +15,124 @@ class LoginStateInit extends LoginState {
         ..show(screen.context);
     }
   }
-  TextEditingController usernameController = TextEditingController();
+
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final GlobalKey<FormState> _loginKey = GlobalKey<FormState>();
-  TextStyle tileStyle = TextStyle(fontWeight: FontWeight.w600);
+  bool validPassword = false;
+  bool validEmail = false;
+
   @override
   Widget getUI(BuildContext context) {
-    return Form(
-      key: _loginKey,
-      child: Stack(
-        children: [
-          Container(
-            width: double.maxFinite,
-            child: Center(
-              child: Container(
-                constraints: BoxConstraints(maxWidth: 600),
-                child: ListView(
-                  physics: BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
+    return GestureDetector(
+      onTap: () {
+        var focus = FocusScope.of(context);
+        if (!focus.hasPrimaryFocus) {
+          focus.unfocus();
+        }
+      },
+      child: BackgroundScreen(
+        checkIfCenter: true,
+        child: Stack(
+          children: [
+            BackgroundScreen(child:SizedBox()),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flex(
+                  direction: Axis.vertical,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    MediaQuery.of(context).viewInsets.bottom == 0
-                        ? SvgPicture.asset(
-                            SvgAsset.AUTH_SVG,
-                            width: 150,
-                          )
-                        : SizedBox(),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 4.0, left: 32, right: 32, top: 8),
-                      child: Text(
-                        S.of(context).username,
-                        style: tileStyle,
-                      ),
+                    Image.asset(
+                      ImageAsset.FULL_LOGO_IMAGE,
+                      height: 200,
+                      width: 200,
                     ),
-                    ListTile(
-                      title: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CustomLoginFormField(
-                          contentPadding: EdgeInsets.only(
-                              left: 0, right: 0, top: 15, bottom: 0),
-                          controller: usernameController,
-                          hintText: S.of(context).registerHint,
-                          preIcon: Icon(Icons.email),
+                    InputField(
+                      controller: emailController,
+                      hintText: S.current.email,
+                      validText: validEmail,
+                      errorText: S.current.pleaseEnterYourEmail,
+                      valueChanged: (value) {
+                        validEmail = false;
+                        screen.refresh();
+                      },
+                      iconData: Icons.email,
+                      textInputType: TextInputType.emailAddress,
+                    ),
+                    InputField(
+                      controller: passwordController,
+                      hintText: S.current.password,
+                      errorText: S.current.pleaseEnterYourPassword,
+                      valueChanged: (value) {
+                        validPassword = false;
+                        screen.refresh();
+                      },
+                      iconData: Icons.password_rounded,
+                      textInputType: TextInputType.visiblePassword,
+                    ),
+                    // Container(
+                    //   alignment: Alignment.bottomLeft,
+                    //   padding: const EdgeInsets.only(left: 40.0, top: 10.0),
+                    //   child: InkWell(
+                    //     onTap: () {},
+                    //     child: Text(
+                    //       S.current.f,
+                    //     ),
+                    //   ),
+                    // ),
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        if (emailController.text.isEmpty) {
+                          validEmail = true;
+                          return;
+                        }
+                        if (passwordController.text.isEmpty) {
+                          validPassword = true;
+                          return;
+                        }
+                        screen.loginClient(emailController.text, passwordController.text);
+                        screen.refresh();
+                      },
+                      child:Container(
+                        height: 45.0,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Theme.of(context)
+                                  .primaryColor
+                                  .withOpacity(0.15),
+                              spreadRadius: 1.0,
+                              blurRadius: 1.0,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
                         ),
+                        margin: const EdgeInsets.only(
+                            left: 30.0, top: 10.0, right: 30.0),
+                        child: Center(
+                            child:screen.loadingSnapshot.connectionState != ConnectionState.waiting ?  Text(
+                              S.current.login,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18.0),
+                            ) : CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            )),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: 8.0, left: 32, right: 32, top: 8),
-                      child: Text(
-                        S.of(context).password,
-                        style: tileStyle,
-                      ),
-                    ),
-                    ListTile(
-                      title: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CustomLoginFormField(
-                          preIcon: Icon(Icons.lock),
-                          last: true,
-                          controller: passwordController,
-                          password: true,
-                          contentPadding: EdgeInsets.fromLTRB(0, 15, 0, 0),
-                          hintText: S.of(context).password,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 150,
                     ),
                   ],
                 ),
-              ),
+              ],
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              constraints: BoxConstraints(maxWidth: 600),
-              child: AuthButtons(
-                  firstButtonTitle: S.of(context).login,
-                  secondButtonTitle: S.of(context).register,
-                  loading: screen.loadingSnapshot.connectionState ==
-                      ConnectionState.waiting,
-                  secondButtonTab: () => Navigator.of(context)
-                      .pushReplacementNamed(AuthorizationRoutes.REGISTER_SCREEN,
-                          arguments: screen.args),
-                  firstButtonTab: () {
-                    if (_loginKey.currentState!.validate()) {
-                      screen.loginClient(
-                          usernameController.text, passwordController.text);
-                    }
-                  }),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

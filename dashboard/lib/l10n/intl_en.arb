@@ -519,7 +519,9 @@
   "specific": "Specific",
   "clients": "Clients",
   "storeAvailable": "Store Availability",
-  "storesInActive": "Stores In Active"
+  "storesInActive": "Stores In Active",
+  "pleaseEnterYourPassword": "PLease enter your password"
+
 
 
 }

@@ -3,6 +3,7 @@ import 'package:taboola/generated/l10n.dart';
 import 'package:taboola/module_auth/authorization_routes.dart';
 import 'package:taboola/module_auth/service/auth_service/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:taboola/module_chat/chat_routes.dart';
 import 'package:taboola/utils/images/images.dart';
 
 @injectable
@@ -34,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<String> _getNextRoute() async {
     if (widget._authService.isLoggedIn) {
-      return 'MainRoutes.MAIN_SCREEN';
+      return ChatRoutes.chatRoute;
     }
     return AuthorizationRoutes.LOGIN_SCREEN;
   }

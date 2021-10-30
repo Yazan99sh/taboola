@@ -1,6 +1,10 @@
 class ImageAsset {
   static const ROOT = 'assets/images/';
+
   static const LOGO = ROOT + 'logo.png';
+  static const BACKGROUND_IMAGE = ROOT + 'background.png';
+  static const FULL_LOGO_IMAGE = ROOT + 'fullLogo.png';
+
   static const PLACEHOLDER = ROOT + 'place.png';
   static const DELIVERY_MOTOR = ROOT + 'delivery_splash.png';
   static const NETWORK = 'https://www.erdeundleben.com/wp-content/uploads/2021/02/folgendes-macht-unser-food-personal-wenn-es-fast-zu-mude-ist-um-zu-kochen-0-Yywyr8ju.jpg';
