@@ -5,7 +5,7 @@ import 'package:taboola/module_auth/state_manager/login_state_manager/login_stat
 import 'package:taboola/module_auth/ui/states/login_states/login_state.dart';
 import 'package:taboola/module_auth/ui/states/login_states/login_state_init.dart';
 import 'package:flutter/material.dart';
-import 'package:taboola/utils/components/custom_app_bar.dart';
+import 'package:taboola/module_main/main_routes.dart';
 import 'package:taboola/utils/helpers/custom_flushbar.dart';
 
 @injectable
@@ -60,7 +60,6 @@ class LoginScreenState extends State<LoginScreen> {
         }
       },
       child: Scaffold(
-
         body: loadingSnapshot.connectionState != ConnectionState.waiting
             ? _currentStates.getUI(context)
             : Stack(
@@ -87,8 +86,8 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   void moveToNext() {
-    // Navigator.of(context)
-    //     .pushNamedAndRemoveUntil(MainRoutes.MAIN_SCREEN, (route) => false);
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil(MainRoutes.MAIN_SCREEN, (route) => false);
     CustomFlushBarHelper.createSuccess(
             title: S.current.warnning, message: S.current.loginSuccess)
         .show(context);

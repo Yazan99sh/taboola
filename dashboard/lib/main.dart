@@ -8,7 +8,9 @@ import 'package:taboola/global_nav_key.dart';
 import 'package:taboola/hive/hive_init.dart';
 import 'package:taboola/module_auth/authoriazation_module.dart';
 import 'package:taboola/module_chat/chat_module.dart';
+import 'package:taboola/module_home/home_module.dart';
 import 'package:taboola/module_localization/service/localization_service/localization_service.dart';
+import 'package:taboola/module_main/main_module.dart';
 import 'package:taboola/module_notifications/service/fire_notification_service/fire_notification_service.dart';
 import 'package:taboola/module_settings/settings_module.dart';
 import 'package:taboola/module_splash/splash_module.dart';
@@ -68,7 +70,8 @@ class MyApp extends StatefulWidget {
   final AuthorizationModule _authorizationModule;
   final SettingsModule _settingsModule;
   final ChatModule _chatModule;
-
+  final MainModule _mainModule;
+  final HomeModule _homeModel;
 
   MyApp(
       this._themeDataService,
@@ -79,6 +82,8 @@ class MyApp extends StatefulWidget {
       this._authorizationModule,
       this._chatModule,
       this._settingsModule,
+      this._mainModule,
+      this._homeModel
 );
 
   @override

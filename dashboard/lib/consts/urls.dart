@@ -6,5 +6,6 @@ class Urls {
   static const String SIGN_UP_API = DOMAIN + '';
   static const String UPLOAD_API = DOMAIN + '';
   static const String NOTIFICATION_API = DOMAIN + '';
+  static const String CATEGORIES_API = DOMAIN + '/categories/';
 
 }
