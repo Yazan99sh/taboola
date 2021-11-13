@@ -106,64 +106,67 @@ class HomeLoadedState extends HomeState {
     print(categories.length);
     List<Widget> widgets = [];
     categories.forEach((element) {
-      widgets.add(Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            width: 120.0,
-            height: 90.0,
-            decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(25),
-              boxShadow: [
-                BoxShadow(
-                  color: Theme.of(context).disabledColor.withOpacity(0.25),
-                  spreadRadius: 1.0,
-                  blurRadius: 1.0,
-                  offset: const Offset(0, 4),
+      widgets.add(Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              width: 120.0,
+              height: 90.0,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(25),
+                boxShadow: [
+                  BoxShadow(
+                    color: Theme.of(context).disabledColor.withOpacity(0.25),
+                    spreadRadius: 1.0,
+                    blurRadius: 1.0,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: CustomNetworkImage(
+                  imageSource: element.categoryImage,
+                  width: 120.0,
+                  height: 90.0,
                 ),
+              ),
+            ),
+            Column(
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(bottom: 5.0),
+                    width: 100.0,
+                    child: Text(element.categoryName , style: TextStyle(fontSize: 14.0 , fontWeight: FontWeight.bold , overflow: TextOverflow.clip ,),textAlign: TextAlign.center,)),
+                const Text("" , style: TextStyle(fontSize: 14.0 , ),),
               ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(25),
-              child: CustomNetworkImage(
-                imageSource: element.categoryImage,
-                width: 120.0,
-                height: 90.0,
-              ),
-            ),
-          ),
-          Column(
-            children: [
-              Container(
-                  margin: const EdgeInsets.only(bottom: 5.0),
-                  width: 100.0,
-                  child: Text(element.categoryName , style: TextStyle(fontSize: 14.0 , fontWeight: FontWeight.bold , overflow: TextOverflow.clip ,),textAlign: TextAlign.center,)),
-              const Text("" , style: TextStyle(fontSize: 14.0 , ),),
-            ],
 
-          ),
-          InkWell(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: (){},
-            child: Container(
-              decoration:  BoxDecoration(
-                color: Theme.of(context).primaryColor.withOpacity(0.8),
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.red , width: 1.0),
+            ),
+            InkWell(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: (){},
+              child: Container(
+                decoration:  BoxDecoration(
+                  color: Theme.of(context).primaryColor.withOpacity(0.8),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.red , width: 1.0),
 
-              ),
-              width: 30.0,
-              height: 30.0,
-              margin: const EdgeInsets.only(right: 10.0),
-              child: const Center(
-                  child:Icon(Icons.delete ,size: 20.0,color: Colors.red,)
+                ),
+                width: 30.0,
+                height: 30.0,
+                margin: const EdgeInsets.only(right: 10.0),
+                child: const Center(
+                    child:Icon(Icons.delete ,size: 20.0,color: Colors.red,)
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ));
     });
   return Flex(direction: Axis.vertical,children: widgets,);

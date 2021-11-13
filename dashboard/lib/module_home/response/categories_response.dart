@@ -6,17 +6,14 @@ class CategoriesResponse {
       this.results,});
 
   CategoriesResponse.fromJson(dynamic json) {
-    count = json['count'];
-    next = json['next'];
-    previous = json['previous'];
-    if (json['results'] != null) {
+    if (json != null) {
       results = [];
-      json['results'].forEach((v) {
+      json.forEach((v) {
         results?.add(Results.fromJson(v));
       });
     }
   }
-  int? count;
+  dynamic count;
   dynamic next;
   dynamic previous;
   List<Results>? results;

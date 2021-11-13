@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:taboola/generated/l10n.dart';
 import 'package:taboola/module_auth/authorization_routes.dart';
+import 'package:taboola/module_auth/presistance/auth_prefs_helper.dart';
 import 'package:taboola/module_auth/service/auth_service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:taboola/module_chat/chat_routes.dart';

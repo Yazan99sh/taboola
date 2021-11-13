@@ -14,7 +14,7 @@ class ApiClient {
 
   ApiClient(this._logger);
 
-  Future<Map<String, dynamic>?> get(
+  Future<dynamic> get(
     String url, {
     Map<String, String>? queryParams,
     Map<String, String>? headers,
@@ -208,7 +208,7 @@ class ApiClient {
     }
   }
 
-  Map<String, dynamic>? _processResponse(Response response) {
+  dynamic _processResponse(Response response) {
     if (response.statusCode! < 500) {
       _logger.info(tag, response.data.toString());
       return response.data;

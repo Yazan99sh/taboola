@@ -24,7 +24,7 @@ class AppThemeDataService {
   }
 
   static Color get AccentColor {
-    return Colors.orangeAccent;
+    return Colors.greenAccent;
   }
 
   ThemeData getActiveTheme() {
@@ -35,7 +35,7 @@ class AppThemeDataService {
         primaryColor: PrimaryColor,
         primaryColorDark: PrimaryDarker,
         accentColor: AccentColor,
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.green,
         focusColor: PrimaryColor,
         cardColor: Colors.grey[150],
         fontFamily: GoogleFonts.almarai().fontFamily,
@@ -48,7 +48,7 @@ class AppThemeDataService {
         primaryColorDark: PrimaryDarker,
         accentColor: AccentColor,
         focusColor: PrimaryColor,
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.green,
         cardColor: Color.fromRGBO(245, 245, 245, 1),
         backgroundColor: Color.fromRGBO(236, 239, 241, 1),
         fontFamily: GoogleFonts.almarai().fontFamily,

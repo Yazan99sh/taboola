@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:share/share.dart';
 import 'package:taboola/di/di_config.dart';
 import 'package:taboola/generated/l10n.dart';
+import 'package:taboola/module_customer/ui/screen/customers_screen.dart';
 import 'package:taboola/module_home/ui/screen/home_screen.dart';
 
 
@@ -43,7 +44,7 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             getIt<HomeScreen>(),
             Container(),
-            Container(),
+            getIt<CustomersScreen>(),
             Container(),
             // getIt<MyOrdersScreen>(),
             // getIt<MyNotificationsScreen>(),
@@ -65,6 +66,8 @@ class _MainScreenState extends State<MainScreen> {
         currentIndex: selectedPage,
         onTap: (index) => setState(() {
           selectedPage = index;
+          homeController.animateToPage(index,
+              duration: Duration(milliseconds: 15), curve: Curves.linear);
 
           // if(index==1){
           //   //Navigator.of(context).pushNamed(Routes.favorite).then((value) => setState((){}));
