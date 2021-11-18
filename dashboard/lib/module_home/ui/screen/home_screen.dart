@@ -1,6 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:taboola/module_home/request/category_request.dart';
 import 'package:taboola/module_home/state_manager/home_state_manager.dart';
 import 'package:taboola/module_home/ui/state/home_loaded_state.dart';
 import 'package:taboola/module_home/ui/state/home_loading_state.dart';
@@ -27,6 +28,9 @@ class HomeScreenState extends State<HomeScreen> {
 
   Future<void> getHomeData() async {
     widget._homeStateManager.getHomeData(this);
+  }
+  void createCategory(CategoryRequest request){
+    widget._homeStateManager.createCategory(this, request);
   }
 
   @override

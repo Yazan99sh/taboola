@@ -6,6 +6,7 @@ import 'package:share/share.dart';
 import 'package:taboola/di/di_config.dart';
 import 'package:taboola/generated/l10n.dart';
 import 'package:taboola/module_customer/ui/screen/customers_screen.dart';
+import 'package:taboola/module_delivery/ui/screen/operators_screen.dart';
 import 'package:taboola/module_home/ui/screen/home_screen.dart';
 
 
@@ -46,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
             Container(),
             getIt<CustomersScreen>(),
             Container(),
-            // getIt<MyOrdersScreen>(),
+            getIt<DeliveryOperatorsScreen>(),
             // getIt<MyNotificationsScreen>(),
             // getIt<AccountScreen>()
           ],

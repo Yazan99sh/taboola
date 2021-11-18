@@ -55,6 +55,10 @@ class HomeLoadedState extends HomeState {
 
   Widget homeUi(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {  },
+
+      ),
       body: BackgroundScreen(
         child: SingleChildScrollView(
           child: Padding(
